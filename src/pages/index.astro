@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Practicando con Astro.">
+<Layout title="Massa vs Milei">
 	<header class="grid place-content-center mt-10">
 		<div>
 			<h1 class="text-6xl font-bold text-sky-600">MASSA <span class="text-yellow-300">vs</span> MILEI</h1>
@@ -76,6 +76,7 @@ import Layout from '../layouts/Layout.astro';
 	results.classList.add('flex')
 	vote.classList.remove('flex')
 	vote.classList.add('hidden')
+	massaButton.classList.add('hidden')
   });
 
   mileiButton.addEventListener('click', () => {
@@ -85,6 +86,7 @@ import Layout from '../layouts/Layout.astro';
 	results.classList.add('flex')
 	vote.classList.remove('flex')
 	vote.classList.add('hidden')
+	mileiButton.classList.add('hidden')
   });
 
   if (localStorage.getItem('contadorMassa') !== null) {
