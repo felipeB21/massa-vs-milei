@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Practicando con Astro.">
+	<header class="grid place-content-center mt-10">
+		<div>
+			<h1 class="text-6xl font-bold text-sky-600">MASSA <span class="text-yellow-300">vs</span> MILEI</h1>
+		</div>
+		<div class=" text-center py-2 mt-4">
+			<h2 class="text-4xl font-bold">¿A quien votas?</h2>
+		</div>
+	</header>
+	<main class="flex items-center justify-around">
+		<div>
+			<img class="w-[400px] h-[60vh]" src="/massa.png" alt="massa">
+		</div>
+		<div>
+			<img class="w-[400px] h-[60vh]" src="/milei.png" alt="milei">
+		</div>
+	</main>
+	<section class="bg-stone-950 h-[30vh]">
+		<div class="buttons flex items-center justify-around">
+			<div class="mt-4">
+				<button class="massa border border-white bg-black text-white px-4 py-1 rounded w-[220px] hover:bg-stone-950">Massa</button>
+			</div>
+			<div class="mt-4 ml-2">
+				<button class="milei border border-white bg-black text-white px-4 py-1 rounded w-[220px] hover:bg-stone-950">Milei</button>
+			</div>
+		</div>
+		<div class="vote flex justify-center items-center text-white mt-10">
+			<p>Vota para ver los resultados!</p>
+		</div>
+		<div class="results hidden flex-col items-center justify-start text-white">
+			<div>
+				<p class="mileiCount">Milei: </p>
+			</div>
+			<div>
+				<p class="massaCount">Massa: </p>
+			</div>
+			<div>
+				<p class="font-bold">Gracias por votar!</p>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	const massaButton = document.querySelector('.massa');
+  	const mileiButton = document.querySelector('.milei');
+
+	const massaCount = document.querySelector('.massaCount')
+	const mileiCount = document.querySelector('.mileiCount')
+
+	let buttons = document.querySelector('.buttons')
+	let results = document.querySelector('.results')
+	let vote = document.querySelector('.vote')
+
+  	let contadorMassa = localStorage.getItem('contadorMassa');
+  	let contadorMilei = localStorage.getItem('contadorMilei');
+
+	  function handleButtonClick(button, contadorKey) {
+    const contador = localStorage.getItem(contadorKey);
+    if (contador === null) {
+      // El botón no ha sido presionado antes
+      localStorage.setItem(contadorKey, 'pressed');
+      button.textContent = 'Ya votaste';
+      button.disabled = true; // Deshabilitar el botón
+    }
+  }
+
+  massaButton.addEventListener('click', () => {
+    handleButtonClick(massaButton, 'contadorMassa');
+	buttons.classList.add('hidden')
+	results.classList.remove('hidden')
+	results.classList.add('flex')
+	vote.classList.remove('flex')
+	vote.classList.add('hidden')
+  });
+
+  mileiButton.addEventListener('click', () => {
+    handleButtonClick(mileiButton, 'contadorMilei');
+	buttons.classList.add('hidden')
+	results.classList.remove('hidden')
+	results.classList.add('flex')
+	vote.classList.remove('flex')
+	vote.classList.add('hidden')
+  });
+
+  if (localStorage.getItem('contadorMassa') !== null) {
+    massaCount.innerHTML += contadorMassa + ' votos';
+    massaButton.disabled = true;
+  }
+  if (localStorage.getItem('contadorMilei') !== null) {
+    mileiCount.innerHTML += contadorMilei + ' votos';
+    mileiButton.disabled = true;
+  }
+</script>
